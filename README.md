@@ -15,6 +15,13 @@ This is a personal project that is still being worked on. More features will be 
 ### Create .env File
 `cp .env.example .env`
 
+Update BROADCAST_DRIVER to "ably" and add your "ABLY_KEY" 
+
+<pre>
+BROADCAST_DRIVER=ably
+ABLY_KEY=
+</pre>
+
 Don't forget to generate APP_KEY
 
 `php artisan key:generate`
