@@ -16,6 +16,7 @@ This is a personal project that is still being worked on. More features will be 
 `cp .env.example .env`
 
 Don't forget to generate APP_KEY
+
 `php artisan key:generate`
 
 ### Create Symlink for storage
@@ -26,4 +27,5 @@ Don't forget to generate APP_KEY
 
 ### Run the App
 `php artisan server`
+
 `npm run dev`
