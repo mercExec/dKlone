@@ -61,7 +61,7 @@
 </template>
 
 <script setup>
-import { onUnmounted, ref } from "vue";
+import { onBeforeMount, onUnmounted, ref } from "vue";
 import { useAuthStore } from "../stores/auth";
 
 const authStore = useAuthStore();
@@ -69,6 +69,11 @@ const form = ref({
     email: '',
     password: ''
 });
+
+onBeforeMount(() => {
+    window.Echo = null;
+    window.Ably = null;
+})
 
 onUnmounted(() => {
     authStore.authErrors = [];

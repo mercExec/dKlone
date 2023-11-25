@@ -600,6 +600,7 @@ const showContextMenu = (event, user, tab) => {
 
 const goToConversation = async (recipientId) => {
     let conversation = await conversationsStore.redirectToConversation(recipientId);
+    conversationsStore.userConversations.push(conversation);
     console.log(conversation);
     router.push({ name: 'conversation', params: { conversation: conversation.id } });
 }

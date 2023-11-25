@@ -170,6 +170,7 @@ export const useAuthStore = defineStore("auth", {
         async disconnectFromAbly() {
             window.Echo.leave('user:' + this.user.id);
             window.Echo.leave('all');
+            window.Echo.connector.ably.close();
         },
         async handleLogin(data) {
             this.authErrors = [];
@@ -219,7 +220,7 @@ export const useAuthStore = defineStore("auth", {
         async handleLogout() {
             await this.disconnectFromAbly();
             await axios.post('/logout');
-            this.router.push({ name: 'login' });
+            this.router.push({ name: 'login' }).then(() => { this.router.go() });
             this.authUser = null;
         },
         async handleForgotPassword(email) {
