@@ -21,7 +21,7 @@
         <div class="h-full w-full">
             <div class="h-full flex-none place-items-start">
                 <!-- Chat messages -->
-                <div class="pl-4 h-[819px] w-full">
+                <div class="pl-4 h-[819px] w-[83.8%]">
                     <div class="h-full flex flex-col-reverse">
                         <!-- Chat container -->
                         <div ref="chatContainer" class="w-full pb-[9px] pt-2 overflow-y-auto " @scroll="handleScroll">
@@ -309,7 +309,7 @@ const getMoreMessages = async () => {
         if (endOfMessages.value == false && previousLastMessageId) {
             const previousLastMessage = document.getElementById(previousLastMessageId);
             if (previousLastMessage) {
-                previousLastMessage.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+                chatContainer.value.scrollTop = previousLastMessage.offsetTop;
             }
         }
     }
