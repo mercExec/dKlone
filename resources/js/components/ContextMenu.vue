@@ -57,6 +57,7 @@ const removeFriend = () => {
 
 const goToConversation = async (recipientId) => {
     let conversation = await conversationStore.redirectToConversation(recipientId);
+    conversationsStore.userConversations.push(conversation);
     console.log(conversation);
     router.push({ name: 'conversation', params: { conversation: conversation.id } });
 }

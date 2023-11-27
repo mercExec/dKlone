@@ -45,6 +45,8 @@ class ConversationController extends Controller
             $conversation->save();
         }
         // dd($conversation);
+        $conversation->load('user1', 'user2');
+
         return $conversation;
     }
 
