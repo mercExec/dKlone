@@ -48,6 +48,7 @@ export const useFriendsStore = defineStore("friends", {
 
                         let friend = res.data.recipient.username == username ? res.data.recipient : res.data.sender;
                         console.log(friend);
+                        friend.status = userStatus.OFFLINE;
 
                         const authStore = useAuthStore();
                         authStore.onlineUsers.find((user) => {
@@ -55,9 +56,6 @@ export const useFriendsStore = defineStore("friends", {
                             if (user.id == friend.id) {
                                 console.log('User is online.');
                                 friend.status = userStatus.ONLINE;
-                            } else {
-                                console.log('User is offline.');
-                                friend.status = userStatus.OFFLINE;
                             }
                         });
 
@@ -79,15 +77,13 @@ export const useFriendsStore = defineStore("friends", {
             await axios.post('/api/acceptFriendRequest/' + senderId)
                 .then((res) => {
                     let friend = res.data;
+                    friend.status = userStatus.OFFLINE;
 
                     const authStore = useAuthStore();
                     authStore.onlineUsers.find((user) => {
                         if (user.id == friend.id) {
                             console.log('User is online.');
                             friend.status = userStatus.ONLINE;
-                        } else {
-                            console.log('User is offline.');
-                            friend.status = userStatus.OFFLINE;
                         }
                     });
 

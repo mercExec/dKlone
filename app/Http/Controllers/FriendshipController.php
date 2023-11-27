@@ -6,6 +6,7 @@ use App\Events\AcceptFriendRequest;
 use App\Events\BlockFriend;
 use App\Events\DeleteFriendRequest;
 use App\Events\NewFriendRequest;
+use App\Events\RemoveFriend;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Multicaret\Acquaintances\Models\Friendship;
@@ -72,6 +73,8 @@ class FriendshipController extends Controller
 
         if ($currentUser->isFriendWith($user)) {
             $currentUser->unfriend($user);
+            // Event to remove current user from recepient's (ex-friend) screen
+            \broadcast(new RemoveFriend($currentUser, $user));
             return response()->json('Friend Removed', 200);
         } else {
             return response()->json('This user is not in your friend\'s list', 404);

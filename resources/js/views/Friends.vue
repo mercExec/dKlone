@@ -634,13 +634,6 @@ watch(
     () => { incomingRequests.value = friendsStore.pendingRequests.filter(request => request.recipient_id == authStore.user.id).length },
 );
 
-
-onBeforeMount(async () => {
-    await friendsStore.getPendingFriendships();
-    await friendsStore.getFriends();
-    await friendsStore.getBlockedUsers();
-})
-
 onMounted(() => {
     // Detect click outside context menu
     window.addEventListener('click', () => {

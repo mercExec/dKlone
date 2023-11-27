@@ -63,8 +63,6 @@ export const useAuthStore = defineStore("auth", {
                     .subscribed(function () {
                     })
                     .listen('.friend.new', (data) => {
-                        if (data.status == 'pending') {
-                        }
                         this.friendsStore.pendingRequests.push(data.request)
                     })
                     .listen('.friend.accepted', (data) => {
@@ -88,6 +86,14 @@ export const useAuthStore = defineStore("auth", {
                     .listen('.friend.blocked', (data) => {
                         this.friendsStore.userFriends.find((friend, i) => {
                             if (friend.id === data.blockedBy.id) {
+                                this.friendsStore.userFriends.splice(i, 1);
+                                return true;
+                            }
+                        });
+                    })
+                    .listen('.friend.removed', (data) => {
+                        this.friendsStore.userFriends.find((friend, i) => {
+                            if (friend.id === data.friendRemoved.id) {
                                 this.friendsStore.userFriends.splice(i, 1);
                                 return true;
                             }

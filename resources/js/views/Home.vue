@@ -10,11 +10,17 @@ import { onBeforeMount, onBeforeUnmount } from 'vue';
 import ServersSidebar from '../components/ServersSidebar';
 import { useAuthStore } from '../stores/auth';
 import { useConversationsStore } from '../stores/conversations';
+import { useFriendsStore } from '../stores/friends';
 
 const authStore = useAuthStore();
 const conversationStore = useConversationsStore();
+const friendsStore = useFriendsStore();
 
 onBeforeMount(async () => {
+    await friendsStore.getPendingFriendships();
+    await friendsStore.getFriends();
+    await friendsStore.getBlockedUsers();
+
     if (!window.Echo && !window.Ably) {
         await authStore.connectToAbly();
     }
