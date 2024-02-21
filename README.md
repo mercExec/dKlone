@@ -33,6 +33,6 @@ Don't forget to generate APP_KEY
 `php artisan migrate`
 
 ### Run the App
-`php artisan server`
+`php artisan serve`
 
 `npm run dev`
